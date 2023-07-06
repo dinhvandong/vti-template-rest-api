@@ -75,7 +75,8 @@ public class WebSecurityConfig {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().requestMatchers("/api/auth/**", "/oauth/authorize**", "/login**", "/error**").permitAll()
+                .authorizeRequests().
+                requestMatchers("/api/auth/**", "/oauth/authorize**", "/login**", "/error**").permitAll()
                 .requestMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated();
         http.headers().frameOptions().sameOrigin();

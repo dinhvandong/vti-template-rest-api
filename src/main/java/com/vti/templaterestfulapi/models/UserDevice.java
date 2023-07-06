@@ -10,7 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 public class UserDevice {
-
+    // 1- Android
+    // 1 - Postman
+    // Thông tin về thiết bị theo user
 	@Id
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_device_seq")
