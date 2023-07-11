@@ -26,8 +26,24 @@ public class CategoryController {
                 new ResponseObject(200, "Ok",
                         categoryService.insert(category)));
 
-
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@Valid @RequestBody Category category) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject(200, "Ok",
+                        categoryService.update(category)));
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> delete( @RequestBody Category category) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject(200, "Ok",
+                        categoryService.delete(category)));
+    }
+
     @PostMapping("/findAll")
     public ResponseEntity<?> findAll() {
 

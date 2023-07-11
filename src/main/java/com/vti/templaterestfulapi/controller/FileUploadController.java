@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(path = "/api/v1/FileUpload")
+@RequestMapping(path = "/api/FileUpload")
 public class FileUploadController {
     //Inject Storage Service here
     @Autowired

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Configurable
@@ -15,7 +16,14 @@ import java.util.List;
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    SequenceGeneratorService sequenceGeneratorService;
+
     public Product insert(Product product){
+        product.setId(sequenceGeneratorService.generateSequence(Product.SEQUENCE_NAME));
+        product.setCreateDate(new Date());
+        product.setActive(true);
         return productRepository.insert(product);
     }
 
