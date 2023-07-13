@@ -60,6 +60,7 @@ public class AuthController {
     public ResponseEntity<?> logout(@RequestParam String refreshToken, @RequestHeader("Authorization") String token) {
         Optional<RefreshToken> optionalRefreshToken = refreshTokenService.findByToken(refreshToken);
         String jwt = token.split(" ")[1];
+        System.out.println("Test Login");
         if (optionalRefreshToken.isPresent()) {
             refreshTokenService.deleteById(optionalRefreshToken.get().getId());
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, "Logout success", ""));
@@ -73,6 +74,8 @@ public class AuthController {
         if (!optionalUser.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "Fail", "User or password is incorrect!!"));
         }
+        System.out.println("Test signin");
+
         User user = optionalUser.get();
         if (user.isActive()) {
             Authentication authentication = authenticationManager.authenticate(
