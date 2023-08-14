@@ -60,23 +60,17 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(csrf -> csrf.disable());
-//        http.exceptionHandling(exception->exception.disable());
-//        http.cors(cors->cors.disable());
-//        http
-//                .authorizeRequests()
-//                .requestMatchers("/api/auth/**").permitAll()
-//                .anyRequest().authenticated();
-//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
+
 
         System.out.println("HTTP SECURITY");
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().
-                requestMatchers("/api/auth/**", "/oauth/authorize**", "/login**", "/error**","/api/FileUpload/files/**").permitAll()
+                requestMatchers("/api/auth/**", "/oauth/authorize**",
+                        "/login**", "/error**","/api/FileUpload/files/**",
+                        "/api/category/**"
+                        ,"/api/tours", '').permitAll() // Danh sach routing bo qua authen
                 .requestMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated();
         http.headers().frameOptions().sameOrigin();

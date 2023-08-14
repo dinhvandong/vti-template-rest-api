@@ -19,3 +19,16 @@ public class OrderReport {
     private List<Order> orderList;
 
 }
+/*
+* {
+* date:"2023-07-10",
+* "orderList": [
+*  {
+* orderID:1,
+* productList:[
+* ]
+* }
+* ]
+* }
+*
+* */

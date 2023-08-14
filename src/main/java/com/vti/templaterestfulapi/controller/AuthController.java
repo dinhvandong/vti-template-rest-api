@@ -91,6 +91,12 @@ public class AuthController {
                     .map(UserDevice::getRefreshToken)
                     .map(RefreshToken::getId)
                     .ifPresent(refreshTokenService::deleteById);
+
+            Optional<UserDevice> optionalUserDevice = userDeviceService.findByUserId(user.getId());
+            if(optionalUserDevice.isPresent()){
+                userDeviceService.deleteOldDevice(user.getId());
+            }
+
             UserDevice userDevice = userDeviceService.createUserDevice(loginForm.getDeviceInfo());
             RefreshToken refreshToken = refreshTokenService.createRefreshToken();
             userDevice.setUser(user);
@@ -125,14 +131,14 @@ public class AuthController {
             logOutRequest.setDeviceInfo(new DeviceInfo(oldDeivce.getDeviceId(), oldDeivce.getDeviceType()));
             userService.logout(oldDeivce.getDeviceId(), oldDeivce.getUser().getId(), logOutRequest);
         }
-        for (Role role : user.getRoles()) {
-            if (role.getName() == ERole.ROLE_MODERATOR ||
-                    role.getName() == ERole.ROLE_ADMIN ||
-                    role.getName() == ERole.ROLE_MODERATOR) {
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "Fail", "Account have no permission!"));
-
-            }
-        }
+//        for (Role role : user.getRoles()) {
+//            if (role.getName() == ERole.ROLE_MODERATOR ||
+//                    role.getName() == ERole.ROLE_ADMIN ||
+//                    role.getName() == ERole.ROLE_MODERATOR) {
+//                return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "Fail", "Account have no permission!"));
+//
+//            }
+//        }
         if (user.isActive()) {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

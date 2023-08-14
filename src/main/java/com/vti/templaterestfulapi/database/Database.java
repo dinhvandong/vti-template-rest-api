@@ -30,27 +30,19 @@ public class Database {
             @Override
             public void run(String... args) throws Exception {
               //  new ConectorSQL().mostrarDatos();
-
                 Role role1 = new Role();
                 role1.setId(1);
                 role1.setName(ERole.ROLE_ADMIN);
-
                 Role role2 = new Role();
                 role2.setId(2);
-                role2.setName(ERole.ROLE_MODERATOR);
-
+                role2.setName(ERole.ROLE_MANAGER);
                 Role role3 = new Role();
                 role3.setId(3);
-                role3.setName(ERole.ROLE_AH);
-
-                Role role4 = new Role();
-                role4.setId(4);
-                role4.setName(ERole.ROLE_TEACHER);
+                role3.setName(ERole.ROLE_USER);
                 if(roleRepository.findAll().size()==0){
                     roleRepository.save(role1);
                     roleRepository.save(role2);
                     roleRepository.save(role3);
-                    roleRepository.save(role4);
                 }
 
             // Generate user super admin
