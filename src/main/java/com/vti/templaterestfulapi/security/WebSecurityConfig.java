@@ -70,7 +70,7 @@ public class WebSecurityConfig {
                 requestMatchers("/api/auth/**", "/oauth/authorize**",
                         "/login**", "/error**","/api/FileUpload/files/**",
                         "/api/category/**"
-                        ,"/api/tours", '').permitAll() // Danh sach routing bo qua authen
+                        ,"/api/tours").permitAll() // Danh sach routing bo qua authen
                 .requestMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated();
         http.headers().frameOptions().sameOrigin();

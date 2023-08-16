@@ -21,7 +21,7 @@ public class Booking {
     private Long id;
     @Transient
     public static final String SEQUENCE_NAME = "booking_sequence";
-    List<User> userList;
+    List<Profile> userList;
     private String username ;
     private String phone;
     private String email;
